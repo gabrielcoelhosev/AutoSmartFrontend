@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 import axios from 'axios';
 
@@ -20,7 +21,6 @@ import {
     MoreHorizontal,
     Car,
     Calendar,
-    DollarSign,
     ChevronDown
 } from 'lucide-react'
 
@@ -37,6 +37,12 @@ export default function VehiclesDataTable() {
         getVeiculos();
     }, []);
 
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate('/cadastro-veiculo');
+    }
+
     function getVeiculos() {
         axios.get('http://localhost:5555/veiculos')
             .then(response => {
@@ -51,7 +57,7 @@ export default function VehiclesDataTable() {
     const statusOptions = ['Todos', 'Disponível', 'Vendido', 'Manutenção', 'Reservado']
 
     return (
-        <div className="min-h-screen bg-gray-50 p-6">
+        <div className="min-h-screen p-6">
             <div className="ml-64 w-[calc(100%-16rem)]">
                 {/* Header */}
                 <div className="mb-8">
@@ -89,18 +95,6 @@ export default function VehiclesDataTable() {
                             <Calendar className="w-8 h-8 text-green-600" />
                         </div>
                     </div>
-
-                    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                        <div className="flex items-center justify-between">
-                            <div>
-                                <p className="text-sm font-medium text-gray-600">
-                                    Valor Total
-                                </p>
-
-                            </div>
-                            <DollarSign className="w-8 h-8 text-purple-600" />
-                        </div>
-                    </div>
                 </div>
 
                 <div className="bg-white rounded-lg shadow-sm border border-gray-200">
@@ -112,7 +106,7 @@ export default function VehiclesDataTable() {
                                     Visualize e gerencie todos os veículos cadastrados
                                 </p>
                             </div>
-                            <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
+                            <button onClick={handleClick} className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
                                 <Plus className="w-4 h-4" />
                                 Adicionar Veículo
                             </button>
