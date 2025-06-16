@@ -6,6 +6,7 @@ import { CadastrarVeiculo } from "./pages/veiculos/cadastrarVeiculo";
 import ClientesDataTable from "./pages/clientes/listClientes";
 import { CadastrarCliente } from "./pages/clientes/cadastrarClientes";
 import SettingsTags from "./pages/configuracoes/configuracoes";
+import MessageConfigPage from "./pages/mensagens/mensagens";
 
 export function AppRoutes() {
     const routes = createBrowserRouter([
@@ -43,6 +44,11 @@ export function AppRoutes() {
           id: 'configuracoes',
           path: '/configuracoes',
           Component: SettingsTags,
+        },
+        {
+          id: 'mensagens',
+          path: '/mensagens',
+          Component: MessageConfigPage,
         },
 
       ]

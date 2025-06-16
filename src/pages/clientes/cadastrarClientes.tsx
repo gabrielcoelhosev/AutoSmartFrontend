@@ -5,25 +5,49 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Car, Loader2, CheckCircle, AlertCircle } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
+interface Tag {
+    id_tag: string;
+    descricao: string;
+}
 
 export function CadastrarCliente() {
     const [formData, setFormData] = useState({
         nome: '',
         cpf: '',
-        tag: '' ,
+        tag: '',
         data_nascimento: '',
     });
 
     const [isLoading, setIsLoading] = useState(false);
     const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
 
+    const [tags, setTags] = useState<Tag[]>([]); // Tipagem correta
+
+    async function getTags() {
+        try {
+            const response = await axios.get('http://localhost:5555/tags');
+            console.log('Tags recebidas:', response.data.dados); // Para debug
+            setTags(response.data.dados || []);
+        } catch (error) {
+            console.error('Erro ao buscar tags:', error);
+            setTags([]);
+        }
+    }
+
+    useEffect(() => {
+        getTags()
+    })
+
     async function postCliente() {
         setIsLoading(true);
         setMessage(null);
         try {
-           
-            
+
+
             const response = await fetch('http://localhost:5555/clientes', {
                 method: 'POST',
                 headers: {
@@ -58,6 +82,12 @@ export function CadastrarCliente() {
             [name]: name === 'ano' ? Number(value) : value
         }));
     }
+    const handleSelectChange = (value: string) => {
+        setFormData(prev => ({
+            ...prev,
+            tag: value
+        }));
+    }
 
     const isFormValid = formData.nome && formData.cpf && formData.tag && formData.data_nascimento;
 
@@ -90,7 +120,7 @@ export function CadastrarCliente() {
                                 <Car className="w-5 h-5 text-blue-600" />
                                 Novo Cliente
                             </CardTitle>
-                          
+
                         </div>
                     </CardHeader>
 
@@ -123,45 +153,51 @@ export function CadastrarCliente() {
                                     className="transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                 />
                             </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="tag" className="text-sm font-medium">
+                                    Tag/Identificação *
+                                </Label>
+                                <Select value={formData.tag} onValueChange={handleSelectChange}>
+                                    <SelectTrigger className="w-full">
+                                        <SelectValue placeholder="Selecione uma tag" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        {tags.length > 0 ? (
+                                            tags.map((tag) => (
+                                                <SelectItem key={tag.id_tag} value={tag.descricao}>
+                                                    {tag.descricao}
+                                                </SelectItem>
+                                            ))
+                                        ) : (
+                                            <div className="p-2 text-sm text-gray-500 text-center">
+                                                Nenhuma tag disponível
+                                            </div>
+                                        )}
+                                    </SelectContent>
+                                </Select>
+                            </div>
 
                             <div className="space-y-2">
-                                <Label htmlFor="ano" className="text-sm font-medium /">
-                                    tag *
+                                <Label htmlFor="tag" className="text-sm font-medium 0">
+                                    Data de Nascimento *
                                 </Label>
                                 <Input
-                                    id="tag"
-                                    type="text"
-                                    name="tag"
-                                    value={formData.tag}
+                                    id="data_nascimento"
+                                    type="date"
+                                    name="data_nascimento"
+                                    value={formData.data_nascimento}
                                     onChange={handleChange}
-                                    min="1900"
-                                    max="2030"
                                     className="transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                 />
                             </div>
 
-                        <div className="space-y-2">
-                            <Label htmlFor="tag" className="text-sm font-medium 0">
-                                Data de Nascimento *
-                            </Label>
-                            <Input
-                                id="data_nascimento"
-                                type="date"
-                                name="data_nascimento"
-                                value={formData.data_nascimento}
-                                onChange={handleChange}
-                                className="transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                            />
-                        </div>
-                           
                         </div>
 
                         {message && (
-                            <Alert className={`border-l-4 ${
-                                message.type === 'success' 
-                                    ? 'border-l-green-500 bg-green-50 text-green-800' 
+                            <Alert className={`border-l-4 ${message.type === 'success'
+                                    ? 'border-l-green-500 bg-green-50 text-green-800'
                                     : 'border-l-red-500 bg-red-50 text-red-800'
-                            }`}>
+                                }`}>
                                 {message.type === 'success' ? (
                                     <CheckCircle className="h-4 w-4" />
                                 ) : (
@@ -227,7 +263,7 @@ export function CadastrarCliente() {
                                         <span className="font-medium ">Data Nascimento:</span> {formData.data_nascimento}
                                     </div>
                                 )}
-                                
+
                             </div>
                         </CardContent>
                     </Card>

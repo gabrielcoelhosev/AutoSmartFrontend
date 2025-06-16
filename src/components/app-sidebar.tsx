@@ -34,11 +34,7 @@ const data = {
           url: "/cadastro-veiculo",
           isActive: false,
         },
-        {
-          title: "Relatórios",
-          url: "/veiculos/relatorios",
-          isActive: false,
-        },
+
       ],
     },
     {
@@ -56,11 +52,7 @@ const data = {
           url: "/cadastro-cliente",
           isActive: false,
         },
-        {
-          title: "Histórico",
-          url: "/clientes/historico",
-          isActive: false,
-        },
+
       ],
     },
     {
@@ -69,15 +61,11 @@ const data = {
       icon: MessageCircle,
       items: [
         {
-          title: "Conversas Ativas",
-          url: "/chat/ativas",
+          title: "Mensagens",
+          url: "/mensagens",
           isActive: false,
         },
-        {
-          title: "Histórico",
-          url: "/chat/historico",
-          isActive: false,
-        },
+
         {
           title: "Configurações",
           url: "/configuracoes",
