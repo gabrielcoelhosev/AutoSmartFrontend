@@ -8,13 +8,12 @@ import { Car, Loader2, CheckCircle, AlertCircle } from "lucide-react";
 // import axios from "axios"; // Axios não disponível no ambiente, usar fetch
 import { useState } from "react";
 
-export function CadastrarVeiculo() {
+export function CadastrarCliente() {
     const [formData, setFormData] = useState({
-        modelo: '',
-        marca: '',
-        ano: '' as string | number,
-        cor: '',
-        tag: ''
+        nome: '',
+        cpf: '',
+        tag: '' ,
+        data_nascimento: '',
     });
 
     const [isLoading, setIsLoading] = useState(false);
@@ -24,17 +23,14 @@ export function CadastrarVeiculo() {
         setIsLoading(true);
         setMessage(null);
         try {
-            const dataToSend = {
-                ...formData,
-                ano: Number(formData.ano)
-            };
+           
             
-            const response = await fetch('http://localhost:5555/veiculos', {
+            const response = await fetch('http://localhost:5555/clientes', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(dataToSend)
+                body: JSON.stringify(formData)
             });
 
             if (!response.ok) {
@@ -43,11 +39,10 @@ export function CadastrarVeiculo() {
 
             setMessage({ type: 'success', text: 'Veículo cadastrado com sucesso!' });
             setFormData({
-                modelo: '',
-                marca: '',
-                ano: '',
-                cor: '',
-                tag: ''
+                nome: '',
+                cpf: '',
+                tag: '',
+                data_nascimento: ''
             });
         } catch (error) {
             console.error("Erro ao cadastrar veículo:", error);
@@ -65,7 +60,7 @@ export function CadastrarVeiculo() {
         }));
     }
 
-    const isFormValid = formData.modelo && formData.marca && formData.ano && formData.cor && formData.tag;
+    const isFormValid = formData.nome && formData.cpf && formData.tag && formData.data_nascimento;
 
     return (
         <div className="min-h-screen  p-6 ">
@@ -78,17 +73,12 @@ export function CadastrarVeiculo() {
                         </div>
                         <div>
                             <h1 className="text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent ">
-                                Cadastro de Veículos
+                                Cadastro de Clientes
                             </h1>
-                            <p className="text-gray-600 mt-1">
-                                Gerencie sua frota com facilidade
-                            </p>
+
                         </div>
                     </div>
                     <div className="flex gap-2">
-                        <Badge variant="secondary" className="bg-blue-100 text-blue-700 hover:bg-blue-200">
-                            Sistema de Gestão
-                        </Badge>
                         <Badge variant="outline">
                             Novo Cadastro
                         </Badge>
@@ -115,13 +105,13 @@ export function CadastrarVeiculo() {
                             {/* Modelo */}
                             <div className="space-y-2">
                                 <Label htmlFor="modelo" className="text-sm font-medium text-gray-700">
-                                    Modelo *
+                                    Nome *
                                 </Label>
                                 <Input
-                                    id="modelo"
+                                    id="nome"
                                     type="text"
-                                    name="modelo"
-                                    value={formData.modelo}
+                                    name="nome"
+                                    value={formData.nome}
                                     onChange={handleChange}
                                     placeholder="Ex: Civic, Corolla, Onix"
                                     className="transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -131,13 +121,13 @@ export function CadastrarVeiculo() {
                             {/* Marca */}
                             <div className="space-y-2">
                                 <Label htmlFor="marca" className="text-sm font-medium text-gray-700">
-                                    Marca *
+                                    cpf *
                                 </Label>
                                 <Input
-                                    id="marca"
+                                    id="cpf"
                                     type="text"
-                                    name="marca"
-                                    value={formData.marca}
+                                    name="cpf"
+                                    value={formData.cpf}
                                     onChange={handleChange}
                                     placeholder="Ex: Honda, Toyota, Chevrolet"
                                     className="transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -147,13 +137,13 @@ export function CadastrarVeiculo() {
                             {/* Ano */}
                             <div className="space-y-2">
                                 <Label htmlFor="ano" className="text-sm font-medium text-gray-700">
-                                    Ano *
+                                    tag *
                                 </Label>
                                 <Input
-                                    id="ano"
-                                    type="number"
-                                    name="ano"
-                                    value={formData.ano}
+                                    id="tag"
+                                    type="text"
+                                    name="tag"
+                                    value={formData.tag}
                                     onChange={handleChange}
                                     placeholder="2024"
                                     min="1900"
@@ -162,33 +152,19 @@ export function CadastrarVeiculo() {
                                 />
                             </div>
 
-                            {/* Cor */}
-                            <div className="space-y-2">
-                                <Label htmlFor="cor" className="text-sm font-medium text-gray-700">
-                                    Cor *
-                                </Label>
-                                <Input
-                                    id="cor"
-                                    type="text"
-                                    name="cor"
-                                    value={formData.cor}
-                                    onChange={handleChange}
-                                    placeholder="Ex: Branco, Preto, Prata"
-                                    className="transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                />
-                            </div>
+                           
                         </div>
 
                         {/* Tag - Campo full width */}
                         <div className="space-y-2">
                             <Label htmlFor="tag" className="text-sm font-medium text-gray-700">
-                                Tag/Identificação *
+                                Data de Nascimento *
                             </Label>
                             <Input
-                                id="tag"
-                                type="text"
-                                name="tag"
-                                value={formData.tag}
+                                id="data_nascimento"
+                                type="date"
+                                name="data_nascimento"
+                                value={formData.data_nascimento}
                                 onChange={handleChange}
                                 placeholder="Ex: ABC-1234, Código interno"
                                 className="transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -250,31 +226,27 @@ export function CadastrarVeiculo() {
                         </CardHeader>
                         <CardContent>
                             <div className="grid grid-cols-2 gap-4 text-sm">
-                                {formData.modelo && (
+                                {formData.nome && (
                                     <div>
-                                        <span className="font-medium text-gray-600">Modelo:</span> {formData.modelo}
+                                        <span className="font-medium text-gray-600">Modelo:</span> {formData.nome}
                                     </div>
                                 )}
-                                {formData.marca && (
+                                {formData.cpf && (
                                     <div>
-                                        <span className="font-medium text-gray-600">Marca:</span> {formData.marca}
-                                    </div>
-                                )}
-                                {formData.ano && (
-                                    <div>
-                                        <span className="font-medium text-gray-600">Ano:</span> {formData.ano}
-                                    </div>
-                                )}
-                                {formData.cor && (
-                                    <div>
-                                        <span className="font-medium text-gray-600">Cor:</span> {formData.cor}
+                                        <span className="font-medium text-gray-600">Marca:</span> {formData.cpf}
                                     </div>
                                 )}
                                 {formData.tag && (
-                                    <div className="col-span-2">
-                                        <span className="font-medium text-gray-600">Tag:</span> {formData.tag}
+                                    <div>
+                                        <span className="font-medium text-gray-600">Ano:</span> {formData.tag}
                                     </div>
                                 )}
+                                {formData.data_nascimento && (
+                                    <div>
+                                        <span className="font-medium text-gray-600">Cor:</span> {formData.data_nascimento}
+                                    </div>
+                                )}
+                                
                             </div>
                         </CardContent>
                     </Card>

@@ -2,14 +2,12 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 import axios from 'axios';
 
-interface IVeiculos {
-    id_veiculo: number,
-    modelo: string,
-    marca: string,
-    ano: number,
-    cor: string,
-    placa: string
+interface IClientes {
+    id_cliente: number,
+    nome: string,
+    cpf: string,
     tag: string,
+    data_nascimento: string
 }
 
 import {
@@ -20,13 +18,12 @@ import {
     Trash2,
     MoreHorizontal,
     Car,
-    Calendar,
     ChevronDown
 } from 'lucide-react'
 
 
-export default function VehiclesDataTable() {
-    const [veiculos, setVeiculos] = useState<IVeiculos[]>([])
+export default function ClientesDataTable() {
+    const [clientes, setClientes] = useState<IClientes[]>([])
     const [searchTerm, setSearchTerm] = useState('')
     const [statusFilter, setStatusFilter] = useState('Todos')
     const [showStatusDropdown, setShowStatusDropdown] = useState(false)
@@ -34,7 +31,7 @@ export default function VehiclesDataTable() {
 
 
     useEffect(() => {
-        getVeiculos();
+        getClientes();
     }, []);
 
     const navigate = useNavigate();
@@ -43,14 +40,13 @@ export default function VehiclesDataTable() {
         navigate('/cadastro-veiculo');
     }
 
-    function getVeiculos() {
-        axios.get('http://localhost:5555/veiculos')
+    function getClientes() {
+        axios.get('http://localhost:5555/clientes')
             .then(response => {
-                setVeiculos(response.data.dados);
+                setClientes(response.data.dados);
             }).catch(error => {
                 console.error('Erro ao bucar protudos', error);
             })
-        console.log('Feito a Req');
     }
 
 
@@ -62,7 +58,7 @@ export default function VehiclesDataTable() {
                 {/* Header */}
                 <div className="mb-8">
                     <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                        Gestão de Veículos
+                        Gestão de Clientes
                     </h1>
                     <p className="text-gray-600">
                         Gerencie todos os veículos do seu estoque
@@ -74,41 +70,27 @@ export default function VehiclesDataTable() {
                         <div className="flex items-center justify-between">
                             <div>
                                 <p className="text-sm font-medium text-gray-600">
-                                    Total de Veículos
+                                    Total de Clientes
                                 </p>
                                 <p className="text-3xl font-bold text-gray-900">
-                                    {veiculos.length}
+                                    {clientes.length}
                                 </p>
                             </div>
                             <Car className="w-8 h-8 text-blue-600" />
                         </div>
                     </div>
 
-                    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                        <div className="flex items-center justify-between">
-                            <div>
-                                <p className="text-sm font-medium text-gray-600">
-                                    Disponíveis
-                                </p>
-
-                            </div>
-                            <Calendar className="w-8 h-8 text-green-600" />
-                        </div>
-                    </div>
                 </div>
 
                 <div className="bg-white rounded-lg shadow-sm border border-gray-200">
                     <div className="p-6 border-b border-gray-200">
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                             <div>
-                                <h2 className="text-xl font-semibold text-gray-900">Lista de Veículos</h2>
-                                <p className="text-gray-600 text-sm mt-1">
-                                    Visualize e gerencie todos os veículos cadastrados
-                                </p>
+                                <h2 className="text-xl font-semibold text-gray-900">Lista de Clientes</h2>
                             </div>
                             <button onClick={handleClick} className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
                                 <Plus className="w-4 h-4" />
-                                Adicionar Veículo
+                                Cadastrar Cliente
                             </button>
                         </div>
                     </div>
@@ -120,7 +102,7 @@ export default function VehiclesDataTable() {
                                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                                 <input
                                     type="text"
-                                    placeholder="Buscar por modelo, marca ou placa..."
+                                    placeholder="Buscar por nome ou cpf..."
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
                                     className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
@@ -166,30 +148,25 @@ export default function VehiclesDataTable() {
                                             ID
                                         </th>
                                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Veículo
+                                            Nome
                                         </th>
                                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Marca
+                                            cpf
                                         </th>
                                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Ano
+                                            tag
                                         </th>
                                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Cor
+                                            data_nascimento
                                         </th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Placa
-                                        </th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Tags
-                                        </th>
+                                       
                                         <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Ações
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody className="bg-white divide-y divide-gray-200">
-                                    {veiculos.length === 0 ? (
+                                    {clientes.length === 0 ? (
                                         <tr>
                                             <td colSpan={7} className="px-6 py-8 text-center">
                                                 <div className="flex flex-col items-center gap-2">
@@ -199,41 +176,33 @@ export default function VehiclesDataTable() {
                                             </td>
                                         </tr>
                                     ) : (
-                                        veiculos.map((vehicle) => (
-                                            <tr key={vehicle.id_veiculo} className="hover:bg-gray-50 transition-colors">
+                                        clientes.map((cliente) => (
+                                            <tr key={cliente.id_cliente} className="hover:bg-gray-50 transition-colors">
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">
-                                                    {vehicle.id_veiculo}
-                                                </td>
-                                                <td className="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">
-                                                    {vehicle.modelo}
+                                                    {cliente.id_cliente}
                                                 </td>
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">
-                                                    {vehicle.marca}
+                                                    {cliente.nome}
                                                 </td>
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">
-                                                    {vehicle.ano.toString()}
+                                                    {cliente.cpf}
                                                 </td>
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">
-                                                    {vehicle.cor}
+                                                    {cliente.tag}
                                                 </td>
-                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                    {vehicle.ano}
-                                                </td>
-
-
-                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                    {vehicle.tag}
+                                                <td className="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">
+                                                    {cliente.data_nascimento}
                                                 </td>
                                                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                                     <div className="relative">
                                                         <button
-                                                            onClick={() => setShowActionDropdown(showActionDropdown === vehicle.id_veiculo ? 0 : vehicle.id_veiculo)}
+                                                            onClick={() => setShowActionDropdown(showActionDropdown === cliente.id_cliente ? 0 : cliente.id_cliente)}
                                                             className="text-gray-400 hover:text-gray-600 p-1 rounded-md hover:bg-gray-100 transition-colors"
                                                         >
                                                             <MoreHorizontal className="h-4 w-4" />
                                                         </button>
 
-                                                        {showActionDropdown === vehicle.id_veiculo && (
+                                                        {showActionDropdown === cliente.id_cliente && (
                                                             <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
                                                                 <button className="w-full text-left px-4 py-2 hover:bg-gray-50 flex items-center gap-2 first:rounded-t-lg transition-colors">
                                                                     <Edit className="w-4 h-4" />
