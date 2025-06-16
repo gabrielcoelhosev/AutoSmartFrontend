@@ -62,7 +62,7 @@ export function CadastrarCliente() {
     const isFormValid = formData.nome && formData.cpf && formData.tag && formData.data_nascimento;
 
     return (
-        <div className="min-h-screen  p-6 ">
+        <div className="min-h-screen p-6 ">
             <div className="min-h-screen ml-70 p-6 w-[calc(100%)] ">
                 <div className="mb-8 pl-6">
                     <div className="flex items-center gap-3 mb-4">

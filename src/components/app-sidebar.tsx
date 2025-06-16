@@ -71,7 +71,7 @@ const data = {
         },
         {
           title: "Configurações",
-          url: "/chat/configuracoes",
+          url: "/configuracoes",
         },
       ],
     },
@@ -90,7 +90,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   <GalleryVerticalEnd className="size-4" />
                 </div>
                 <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="font-medium">Msc Veículos</span>
+                  <span className="font-medium">MC Veículos</span>
                   <span className="">v1.0.0</span>
                 </div>
               </a>

@@ -5,6 +5,7 @@ import  VeiclhesDataTable  from "./pages/veiculos/listVeiculos"
 import { CadastrarVeiculo } from "./pages/veiculos/cadastrarVeiculo";
 import ClientesDataTable from "./pages/clientes/listClientes";
 import { CadastrarCliente } from "./pages/clientes/cadastrarClientes";
+import SettingsTags from "./pages/configuracoes/configuracoes";
 
 export function AppRoutes() {
     const routes = createBrowserRouter([
@@ -37,6 +38,11 @@ export function AppRoutes() {
           id: 'cadastrar-cliente',
           path: '/cadastro-cliente',
           Component: CadastrarCliente,
+        },
+        {
+          id: 'configuracoes',
+          path: '/configuracoes',
+          Component: SettingsTags,
         },
 
       ]
