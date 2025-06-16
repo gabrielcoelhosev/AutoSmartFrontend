@@ -55,7 +55,6 @@ export default function ClientesDataTable() {
     return (
         <div className="min-h-screen p-6">
             <div className="ml-64 w-[calc(100%)]">
-                {/* Header */}
                 <div className="mb-8">
                     <h1 className="text-3xl font-bold text-gray-900 mb-2">
                         Gestão de Clientes
@@ -96,7 +95,6 @@ export default function ClientesDataTable() {
                     </div>
 
                     <div className="p-6">
-                        {/* Filters */}
                         <div className="flex flex-col sm:flex-row gap-4 mb-6">
                             <div className="relative flex-1">
                                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />

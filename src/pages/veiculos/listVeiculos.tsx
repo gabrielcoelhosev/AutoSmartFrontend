@@ -10,6 +10,7 @@ interface IVeiculos {
     cor: string,
     placa: string
     tag: string,
+    disponivel: boolean
 }
 
 import {
@@ -27,6 +28,7 @@ import {
 
 export default function VehiclesDataTable() {
     const [veiculos, setVeiculos] = useState<IVeiculos[]>([])
+    const [disponiveis, setDisponveis] = useState<Number>();
     const [searchTerm, setSearchTerm] = useState('')
     const [statusFilter, setStatusFilter] = useState('Todos')
     const [showStatusDropdown, setShowStatusDropdown] = useState(false)
@@ -43,10 +45,12 @@ export default function VehiclesDataTable() {
         navigate('/cadastro-veiculo');
     }
 
+
     function getVeiculos() {
         axios.get('http://localhost:5555/veiculos')
             .then(response => {
                 setVeiculos(response.data.dados);
+                setDisponveis(response.data.dados.filter((v: IVeiculos) => v.disponivel === true).length)
             }).catch(error => {
                 console.error('Erro ao bucar protudos', error);
             })
@@ -59,7 +63,6 @@ export default function VehiclesDataTable() {
     return (
         <div className="min-h-screen p-6">
             <div className="ml-64 w-[calc(100%)]">
-                {/* Header */}
                 <div className="mb-8">
                     <h1 className="text-3xl font-bold text-gray-900 mb-2">
                         Gestão de Veículos
@@ -90,6 +93,9 @@ export default function VehiclesDataTable() {
                                 <p className="text-sm font-medium text-gray-600">
                                     Disponíveis
                                 </p>
+                                <p className="text-3xl font-bold text-gray-900">
+                                    {disponiveis?.toString()}
+                                </p>
 
                             </div>
                             <Calendar className="w-8 h-8 text-green-600" />
@@ -114,7 +120,6 @@ export default function VehiclesDataTable() {
                     </div>
 
                     <div className="p-6">
-                        {/* Filters */}
                         <div className="flex flex-col sm:flex-row gap-4 mb-6">
                             <div className="relative flex-1">
                                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
@@ -183,6 +188,9 @@ export default function VehiclesDataTable() {
                                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Tags
                                         </th>
+                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Situação
+                                        </th>
                                         <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Ações
                                         </th>
@@ -220,10 +228,19 @@ export default function VehiclesDataTable() {
                                                     {vehicle.ano}
                                                 </td>
 
-
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                                     {vehicle.tag}
                                                 </td>
+
+                                                {vehicle.disponivel ?
+                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-green-300">
+                                                        Disponível
+                                                    </td>
+                                                    : <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-red-400">
+                                                        Indisponível
+                                                    </td>
+                                                }
+
                                                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                                     <div className="relative">
                                                         <button

@@ -5,7 +5,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Car, Loader2, CheckCircle, AlertCircle } from "lucide-react";
-// import axios from "axios"; // Axios não disponível no ambiente, usar fetch
 import { useState } from "react";
 
 export function CadastrarVeiculo() {
@@ -70,7 +69,6 @@ export function CadastrarVeiculo() {
     return (
         <div className="min-h-screen  p-6 ">
             <div className="min-h-screen ml-70 p-6 w-[calc(100%)] ">
-                {/* Header com gradiente */}
                 <div className="mb-8 pl-6">
                     <div className="flex items-center gap-3 mb-4">
                         <div className="p-2 bg-blue-600 rounded-lg">
@@ -95,7 +93,6 @@ export function CadastrarVeiculo() {
                     </div>
                 </div>
 
-                {/* Card principal com sombra e bordas suaves */}
                 <Card className="max-w-2xl mx-auto shadow-xl border-0 bg-white/80 backdrop-blur-sm">
                     <CardHeader className="space-y-4 pb-8">
                         <div className="text-center">
@@ -110,9 +107,7 @@ export function CadastrarVeiculo() {
                     </CardHeader>
 
                     <CardContent className="space-y-6">
-                        {/* Grid responsivo para os campos */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            {/* Modelo */}
                             <div className="space-y-2">
                                 <Label htmlFor="modelo" className="text-sm font-medium text-gray-700">
                                     Modelo *
@@ -128,7 +123,6 @@ export function CadastrarVeiculo() {
                                 />
                             </div>
 
-                            {/* Marca */}
                             <div className="space-y-2">
                                 <Label htmlFor="marca" className="text-sm font-medium text-gray-700">
                                     Marca *
@@ -144,7 +138,6 @@ export function CadastrarVeiculo() {
                                 />
                             </div>
 
-                            {/* Ano */}
                             <div className="space-y-2">
                                 <Label htmlFor="ano" className="text-sm font-medium text-gray-700">
                                     Ano *
@@ -162,7 +155,6 @@ export function CadastrarVeiculo() {
                                 />
                             </div>
 
-                            {/* Cor */}
                             <div className="space-y-2">
                                 <Label htmlFor="cor" className="text-sm font-medium text-gray-700">
                                     Cor *
@@ -179,7 +171,6 @@ export function CadastrarVeiculo() {
                             </div>
                         </div>
 
-                        {/* Tag - Campo full width */}
                         <div className="space-y-2">
                             <Label htmlFor="tag" className="text-sm font-medium text-gray-700">
                                 Tag/Identificação *
@@ -195,7 +186,6 @@ export function CadastrarVeiculo() {
                             />
                         </div>
 
-                        {/* Mensagens de feedback */}
                         {message && (
                             <Alert className={`border-l-4 ${
                                 message.type === 'success' 
@@ -213,7 +203,6 @@ export function CadastrarVeiculo() {
                             </Alert>
                         )}
 
-                        {/* Botão de submit */}
                         <div className="pt-4">
                             <Button
                                 onClick={postVeiculo}
@@ -235,14 +224,12 @@ export function CadastrarVeiculo() {
                             </Button>
                         </div>
 
-                        {/* Rodapé com informações */}
                         <div className="text-center text-sm text-gray-500 pt-4 border-t border-gray-100">
                             <p>* Campos obrigatórios</p>
                         </div>
                     </CardContent>
                 </Card>
 
-                {/* Card de resumo (opcional) */}
                 {Object.values(formData).some(value => value !== '') && (
                     <Card className="max-w-2xl mx-auto mt-6 bg-gray-50 border-gray-200">
                         <CardHeader>

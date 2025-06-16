@@ -1,11 +1,10 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Car, Loader2, CheckCircle, AlertCircle } from "lucide-react";
-// import axios from "axios"; // Axios não disponível no ambiente, usar fetch
 import { useState } from "react";
 
 export function CadastrarCliente() {
@@ -19,7 +18,7 @@ export function CadastrarCliente() {
     const [isLoading, setIsLoading] = useState(false);
     const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
 
-    async function postVeiculo() {
+    async function postCliente() {
         setIsLoading(true);
         setMessage(null);
         try {
@@ -65,7 +64,6 @@ export function CadastrarCliente() {
     return (
         <div className="min-h-screen  p-6 ">
             <div className="min-h-screen ml-70 p-6 w-[calc(100%)] ">
-                {/* Header com gradiente */}
                 <div className="mb-8 pl-6">
                     <div className="flex items-center gap-3 mb-4">
                         <div className="p-2 bg-blue-600 rounded-lg">
@@ -85,24 +83,19 @@ export function CadastrarCliente() {
                     </div>
                 </div>
 
-                {/* Card principal com sombra e bordas suaves */}
                 <Card className="max-w-2xl mx-auto shadow-xl border-0 bg-white/80 backdrop-blur-sm">
                     <CardHeader className="space-y-4 pb-8">
                         <div className="text-center">
                             <CardTitle className="text-2xl font-semibold text-gray-900 flex items-center justify-center gap-2">
                                 <Car className="w-5 h-5 text-blue-600" />
-                                Novo Veículo
+                                Novo Cliente
                             </CardTitle>
-                            <CardDescription className="text-gray-600 mt-2">
-                                Preencha as informações do veículo para adicionar à sua frota
-                            </CardDescription>
+                          
                         </div>
                     </CardHeader>
 
                     <CardContent className="space-y-6">
-                        {/* Grid responsivo para os campos */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            {/* Modelo */}
                             <div className="space-y-2">
                                 <Label htmlFor="modelo" className="text-sm font-medium text-gray-700">
                                     Nome *
@@ -113,12 +106,10 @@ export function CadastrarCliente() {
                                     name="nome"
                                     value={formData.nome}
                                     onChange={handleChange}
-                                    placeholder="Ex: Civic, Corolla, Onix"
                                     className="transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                 />
                             </div>
 
-                            {/* Marca */}
                             <div className="space-y-2">
                                 <Label htmlFor="marca" className="text-sm font-medium text-gray-700">
                                     cpf *
@@ -129,12 +120,10 @@ export function CadastrarCliente() {
                                     name="cpf"
                                     value={formData.cpf}
                                     onChange={handleChange}
-                                    placeholder="Ex: Honda, Toyota, Chevrolet"
                                     className="transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                 />
                             </div>
 
-                            {/* Ano */}
                             <div className="space-y-2">
                                 <Label htmlFor="ano" className="text-sm font-medium text-gray-700">
                                     tag *
@@ -145,17 +134,12 @@ export function CadastrarCliente() {
                                     name="tag"
                                     value={formData.tag}
                                     onChange={handleChange}
-                                    placeholder="2024"
                                     min="1900"
                                     max="2030"
                                     className="transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                 />
                             </div>
 
-                           
-                        </div>
-
-                        {/* Tag - Campo full width */}
                         <div className="space-y-2">
                             <Label htmlFor="tag" className="text-sm font-medium text-gray-700">
                                 Data de Nascimento *
@@ -166,12 +150,12 @@ export function CadastrarCliente() {
                                 name="data_nascimento"
                                 value={formData.data_nascimento}
                                 onChange={handleChange}
-                                placeholder="Ex: ABC-1234, Código interno"
                                 className="transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             />
                         </div>
+                           
+                        </div>
 
-                        {/* Mensagens de feedback */}
                         {message && (
                             <Alert className={`border-l-4 ${
                                 message.type === 'success' 
@@ -189,10 +173,9 @@ export function CadastrarCliente() {
                             </Alert>
                         )}
 
-                        {/* Botão de submit */}
                         <div className="pt-4">
                             <Button
-                                onClick={postVeiculo}
+                                onClick={postCliente}
                                 disabled={isLoading || !isFormValid}
                                 className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                                 size="lg"
@@ -205,20 +188,18 @@ export function CadastrarCliente() {
                                 ) : (
                                     <>
                                         <Car className="w-4 h-4 mr-2" />
-                                        Cadastrar Veículo
+                                        Cadastrar Cliente
                                     </>
                                 )}
                             </Button>
                         </div>
 
-                        {/* Rodapé com informações */}
                         <div className="text-center text-sm text-gray-500 pt-4 border-t border-gray-100">
                             <p>* Campos obrigatórios</p>
                         </div>
                     </CardContent>
                 </Card>
 
-                {/* Card de resumo (opcional) */}
                 {Object.values(formData).some(value => value !== '') && (
                     <Card className="max-w-2xl mx-auto mt-6 bg-gray-50 border-gray-200">
                         <CardHeader>
@@ -228,22 +209,22 @@ export function CadastrarCliente() {
                             <div className="grid grid-cols-2 gap-4 text-sm">
                                 {formData.nome && (
                                     <div>
-                                        <span className="font-medium text-gray-600">Modelo:</span> {formData.nome}
+                                        <span className="font-medium text-gray-600">Nome:</span> {formData.nome}
                                     </div>
                                 )}
                                 {formData.cpf && (
                                     <div>
-                                        <span className="font-medium text-gray-600">Marca:</span> {formData.cpf}
+                                        <span className="font-medium text-gray-600">Cpf:</span> {formData.cpf}
                                     </div>
                                 )}
                                 {formData.tag && (
                                     <div>
-                                        <span className="font-medium text-gray-600">Ano:</span> {formData.tag}
+                                        <span className="font-medium text-gray-600">Tag:</span> {formData.tag}
                                     </div>
                                 )}
                                 {formData.data_nascimento && (
                                     <div>
-                                        <span className="font-medium text-gray-600">Cor:</span> {formData.data_nascimento}
+                                        <span className="font-medium text-gray-600">Data Nascimento:</span> {formData.data_nascimento}
                                     </div>
                                 )}
                                 
