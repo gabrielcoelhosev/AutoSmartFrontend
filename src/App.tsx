@@ -1,12 +1,12 @@
 import { AppRoutes } from "./app-routes";
-import { SidebarProvider } from "./components/ui/sidebar";
+import { ThemeProvider } from "./components/theme-provider";
 
 export function App() {
   return (
     <>
-      <SidebarProvider>
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         <AppRoutes />
-      </SidebarProvider>
+      </ThemeProvider>
     </>
   )
 }

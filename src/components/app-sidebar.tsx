@@ -14,6 +14,7 @@ import {
   SidebarMenuSubItem,
   SidebarRail,
 } from "@/components/ui/sidebar"
+import { ModeToggle } from "./mode-toggle"
 
 // This is sample data.
 const data = {
@@ -26,14 +27,17 @@ const data = {
         {
           title: "Lista de Veículos",
           url: "/veiculos",
+          isActive: true,
         },
         {
           title: "Adicionar Veículo",
           url: "/cadastro-veiculo",
+          isActive: false,
         },
         {
           title: "Relatórios",
           url: "/veiculos/relatorios",
+          isActive: false,
         },
       ],
     },
@@ -45,14 +49,17 @@ const data = {
         {
           title: "Lista de Clientes",
           url: "/clientes",
+          isActive: false,
         },
         {
           title: "Adicionar Cliente",
           url: "/cadastro-cliente",
+          isActive: false,
         },
         {
           title: "Histórico",
           url: "/clientes/historico",
+          isActive: false,
         },
       ],
     },
@@ -64,14 +71,17 @@ const data = {
         {
           title: "Conversas Ativas",
           url: "/chat/ativas",
+          isActive: false,
         },
         {
           title: "Histórico",
           url: "/chat/historico",
+          isActive: false,
         },
         {
           title: "Configurações",
           url: "/configuracoes",
+          isActive: false,
         },
       ],
     },
@@ -89,10 +99,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
                   <GalleryVerticalEnd className="size-4" />
                 </div>
-                <div className="flex flex-col gap-0.5 leading-none">
+                <div className="flex flex-col gap-0.5 leading-none pr-15">
                   <span className="font-medium">MC Veículos</span>
                   <span className="">v1.0.0</span>
                 </div>
+                  <ModeToggle/>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>

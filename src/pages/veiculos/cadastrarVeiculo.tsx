@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Car, Loader2, CheckCircle, AlertCircle } from "lucide-react";
 import { useState } from "react";
 
+
 export function CadastrarVeiculo() {
     const [formData, setFormData] = useState({
         modelo: '',
@@ -67,18 +68,18 @@ export function CadastrarVeiculo() {
     const isFormValid = formData.modelo && formData.marca && formData.ano && formData.cor && formData.tag;
 
     return (
-        <div className="min-h-screen  p-6 ">
-            <div className="min-h-screen ml-70 p-6 w-[calc(100%)] ">
+        <div className="min-h-screen w-full p-6 ">
+            <div className="m-auto w-full ">
                 <div className="mb-8 pl-6">
                     <div className="flex items-center gap-3 mb-4">
                         <div className="p-2 bg-blue-600 rounded-lg">
                             <Car className="w-6 h-6 text-white" />
                         </div>
                         <div>
-                            <h1 className="text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent ">
+                            <h1 className="text-3xl font-bold bg-gradient-to-r bg-clip-text ">
                                 Cadastro de Veículos
                             </h1>
-                            <p className="text-gray-600 mt-1">
+                            <p>
                                 Gerencie sua frota com facilidade
                             </p>
                         </div>
@@ -93,14 +94,14 @@ export function CadastrarVeiculo() {
                     </div>
                 </div>
 
-                <Card className="max-w-2xl mx-auto shadow-xl border-0 bg-white/80 backdrop-blur-sm">
+                <Card className="max-w-2xl mx-auto shadow-xl border-0 backdrop-blur-sm">
                     <CardHeader className="space-y-4 pb-8">
                         <div className="text-center">
-                            <CardTitle className="text-2xl font-semibold text-gray-900 flex items-center justify-center gap-2">
+                            <CardTitle className="text-2xl font-semibold flex items-center justify-center gap-2">
                                 <Car className="w-5 h-5 text-blue-600" />
                                 Novo Veículo
                             </CardTitle>
-                            <CardDescription className="text-gray-600 mt-2">
+                            <CardDescription className="mt-2">
                                 Preencha as informações do veículo para adicionar à sua frota
                             </CardDescription>
                         </div>
@@ -109,7 +110,7 @@ export function CadastrarVeiculo() {
                     <CardContent className="space-y-6">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="space-y-2">
-                                <Label htmlFor="modelo" className="text-sm font-medium text-gray-700">
+                                <Label htmlFor="modelo" className="text-sm font-medium">
                                     Modelo *
                                 </Label>
                                 <Input
@@ -124,7 +125,7 @@ export function CadastrarVeiculo() {
                             </div>
 
                             <div className="space-y-2">
-                                <Label htmlFor="marca" className="text-sm font-medium text-gray-700">
+                                <Label htmlFor="marca" className="text-sm font-medium">
                                     Marca *
                                 </Label>
                                 <Input
@@ -139,7 +140,7 @@ export function CadastrarVeiculo() {
                             </div>
 
                             <div className="space-y-2">
-                                <Label htmlFor="ano" className="text-sm font-medium text-gray-700">
+                                <Label htmlFor="ano" className="text-sm font-medium">
                                     Ano *
                                 </Label>
                                 <Input
@@ -156,7 +157,7 @@ export function CadastrarVeiculo() {
                             </div>
 
                             <div className="space-y-2">
-                                <Label htmlFor="cor" className="text-sm font-medium text-gray-700">
+                                <Label htmlFor="cor" className="text-sm font-medium">
                                     Cor *
                                 </Label>
                                 <Input
@@ -172,7 +173,7 @@ export function CadastrarVeiculo() {
                         </div>
 
                         <div className="space-y-2">
-                            <Label htmlFor="tag" className="text-sm font-medium text-gray-700">
+                            <Label htmlFor="tag" className="text-sm font-medium">
                                 Tag/Identificação *
                             </Label>
                             <Input
@@ -231,35 +232,35 @@ export function CadastrarVeiculo() {
                 </Card>
 
                 {Object.values(formData).some(value => value !== '') && (
-                    <Card className="max-w-2xl mx-auto mt-6 bg-gray-50 border-gray-200">
+                    <Card className="max-w-2xl mx-auto mt-6">
                         <CardHeader>
-                            <CardTitle className="text-lg text-gray-700">Prévia do Cadastro</CardTitle>
+                            <CardTitle className="text-lg ">Prévia do Cadastro</CardTitle>
                         </CardHeader>
                         <CardContent>
                             <div className="grid grid-cols-2 gap-4 text-sm">
                                 {formData.modelo && (
                                     <div>
-                                        <span className="font-medium text-gray-600">Modelo:</span> {formData.modelo}
+                                        <span className="font-medium ">Modelo:</span> {formData.modelo}
                                     </div>
                                 )}
                                 {formData.marca && (
                                     <div>
-                                        <span className="font-medium text-gray-600">Marca:</span> {formData.marca}
+                                        <span className="font-medium ">Marca:</span> {formData.marca}
                                     </div>
                                 )}
                                 {formData.ano && (
                                     <div>
-                                        <span className="font-medium text-gray-600">Ano:</span> {formData.ano}
+                                        <span className="font-medium ">Ano:</span> {formData.ano}
                                     </div>
                                 )}
                                 {formData.cor && (
                                     <div>
-                                        <span className="font-medium text-gray-600">Cor:</span> {formData.cor}
+                                        <span className="font-medium ">Cor:</span> {formData.cor}
                                     </div>
                                 )}
                                 {formData.tag && (
                                     <div className="col-span-2">
-                                        <span className="font-medium text-gray-600">Tag:</span> {formData.tag}
+                                        <span className="font-medium ">Tag:</span> {formData.tag}
                                     </div>
                                 )}
                             </div>

@@ -62,15 +62,15 @@ export function CadastrarCliente() {
     const isFormValid = formData.nome && formData.cpf && formData.tag && formData.data_nascimento;
 
     return (
-        <div className="min-h-screen p-6 ">
-            <div className="min-h-screen ml-70 p-6 w-[calc(100%)] ">
+        <div className="min-h-screen w-full p-6 ">
+            <div className="m-auto w-full ">
                 <div className="mb-8 pl-6">
                     <div className="flex items-center gap-3 mb-4">
                         <div className="p-2 bg-blue-600 rounded-lg">
                             <Car className="w-6 h-6 text-white" />
                         </div>
                         <div>
-                            <h1 className="text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent ">
+                            <h1 className="text-3xl font-bold bg-gradient-to-r bg-clip-text  ">
                                 Cadastro de Clientes
                             </h1>
 
@@ -83,10 +83,10 @@ export function CadastrarCliente() {
                     </div>
                 </div>
 
-                <Card className="max-w-2xl mx-auto shadow-xl border-0 bg-white/80 backdrop-blur-sm">
+                <Card className="max-w-2xl mx-auto shadow-xl border-0  backdrop-blur-sm">
                     <CardHeader className="space-y-4 pb-8">
                         <div className="text-center">
-                            <CardTitle className="text-2xl font-semibold text-gray-900 flex items-center justify-center gap-2">
+                            <CardTitle className="text-2xl font-semibold  flex items-center justify-center gap-2">
                                 <Car className="w-5 h-5 text-blue-600" />
                                 Novo Cliente
                             </CardTitle>
@@ -97,7 +97,7 @@ export function CadastrarCliente() {
                     <CardContent className="space-y-6">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="space-y-2">
-                                <Label htmlFor="modelo" className="text-sm font-medium text-gray-700">
+                                <Label htmlFor="modelo" className="text-sm font-medium ">
                                     Nome *
                                 </Label>
                                 <Input
@@ -111,7 +111,7 @@ export function CadastrarCliente() {
                             </div>
 
                             <div className="space-y-2">
-                                <Label htmlFor="marca" className="text-sm font-medium text-gray-700">
+                                <Label htmlFor="marca" className="text-sm font-medium ">
                                     cpf *
                                 </Label>
                                 <Input
@@ -125,7 +125,7 @@ export function CadastrarCliente() {
                             </div>
 
                             <div className="space-y-2">
-                                <Label htmlFor="ano" className="text-sm font-medium text-gray-700">
+                                <Label htmlFor="ano" className="text-sm font-medium /">
                                     tag *
                                 </Label>
                                 <Input
@@ -141,7 +141,7 @@ export function CadastrarCliente() {
                             </div>
 
                         <div className="space-y-2">
-                            <Label htmlFor="tag" className="text-sm font-medium text-gray-700">
+                            <Label htmlFor="tag" className="text-sm font-medium 0">
                                 Data de Nascimento *
                             </Label>
                             <Input
@@ -201,30 +201,30 @@ export function CadastrarCliente() {
                 </Card>
 
                 {Object.values(formData).some(value => value !== '') && (
-                    <Card className="max-w-2xl mx-auto mt-6 bg-gray-50 border-gray-200">
+                    <Card className="max-w-2xl mx-auto mt-6 ">
                         <CardHeader>
-                            <CardTitle className="text-lg text-gray-700">Prévia do Cadastro</CardTitle>
+                            <CardTitle className="text-lg ">Prévia do Cadastro</CardTitle>
                         </CardHeader>
                         <CardContent>
                             <div className="grid grid-cols-2 gap-4 text-sm">
                                 {formData.nome && (
                                     <div>
-                                        <span className="font-medium text-gray-600">Nome:</span> {formData.nome}
+                                        <span className="font-medium ">Nome:</span> {formData.nome}
                                     </div>
                                 )}
                                 {formData.cpf && (
                                     <div>
-                                        <span className="font-medium text-gray-600">Cpf:</span> {formData.cpf}
+                                        <span className="font-medium ">Cpf:</span> {formData.cpf}
                                     </div>
                                 )}
                                 {formData.tag && (
                                     <div>
-                                        <span className="font-medium text-gray-600">Tag:</span> {formData.tag}
+                                        <span className="font-medium ">Tag:</span> {formData.tag}
                                     </div>
                                 )}
                                 {formData.data_nascimento && (
                                     <div>
-                                        <span className="font-medium text-gray-600">Data Nascimento:</span> {formData.data_nascimento}
+                                        <span className="font-medium ">Data Nascimento:</span> {formData.data_nascimento}
                                     </div>
                                 )}
                                 
